@@ -1,33 +1,35 @@
 import pyprimes
 
-def memo(f): 
+def memo(f): # to cache 
     cache = {}
     def _f(*args):
         try:
             return cache[args]
         except KeyError:
-            cache[args] = result = f(*args)
+            cache[args] = result = f(*args) 
             return result
     return _f
 
-#@memo
+@memo
 def w(t, c, l):
-    if c == 2 or t == 0:
+    if t == 0 or c == t == 2:
         return 1
+    elif c == 2 != t:
+        if t % c == 0:
+            return 1
+        return 0
     else:
         i = t / c
-        return sum(w(t - i*c, l[l.index(c)+1], l) for i in range(i+1))
+        return sum(w(t - j * c, l[l.index(c)-1], l) for j in range(i+1))
+
+def pw():
+    i = 2
+    while True:
+        l = tuple(pyprimes.primes_below(i))
+        c = l[-1]
+        if w(i, c, l) > 5000:
+            return i
+        i += 1
 
 
-
-def prime_way():
-    l = list(pyprimes.primes_below(10))[::-1]
-    print l
-    return w(10, 7, l)
-
-
-print prime_way()
-    
-    
-    
-
+print pw()
