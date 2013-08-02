@@ -1,14 +1,27 @@
 
-
-def cs(n):
-    c = n - 1
-    d = {i:n-i for i in range(1, n)}
-    for i in xrange(2, n):
-        for j in d:
-            if i <= j:
-                c += d[j] / i 
-    return c
+coin = range(1, 100)[::-1]
 
 
+def memo(f): 
+    cache = {}
+    def _f(*args):
+        try:
+            return cache[args]
+        except KeyError:
+            cache[args] = result = f(*args)
+            return result
+    return _f
 
-print cs(100)
+@memo
+def w(t, c):
+    if c == 1 or t == 0:
+        return 1
+    else:
+        i = t / c
+        return sum(w(t - i*c, coin[coin.index(c)+1]) for i in range(i+1))
+
+print w(100, 99)
+    
+    
+    
+
