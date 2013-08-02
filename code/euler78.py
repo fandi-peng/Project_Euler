@@ -39,7 +39,3 @@ def run():
 
 #print run()
 print p(4096)
-
-
-
-
